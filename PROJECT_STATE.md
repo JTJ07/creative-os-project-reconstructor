@@ -31,11 +31,15 @@ Prompt:
 - `PROMPT_STARTOWY.md`;
 - opis zasad pracy;
 - archiwum ewolucji;
-- scenariusze regresji.
+- scenariusze regresji;
+- `VALIDATION.md`;
+- `scripts/verify_reconstructor.py`;
+- workflow GitHub Actions.
 
 ### EXECUTABLE MECHANISM
 
-Prompt może zostać wklejony do nowej rozmowy wraz z materiałami projektu i prowadzi analizę według stałego formatu A–I.
+- Prompt może zostać wklejony do nowej rozmowy wraz z materiałami projektu i prowadzi analizę według stałego formatu A–I.
+- Deterministyczny walidator może sprawdzić obecność plików, wersję, strukturę promptu, parking i kryteria regresji bez uruchamiania modelu AI.
 
 ### OBSERVED WORKING RESULT
 
@@ -47,6 +51,8 @@ Prompt poprawnie przeanalizował różne klasy projektów, między innymi:
 - projekt bez lokalnego źródła prawdy;
 - system deliberacyjny wymagający przygotowania gotowego `PROJECT_STATE.md`.
 
+Niezależny cold start Creative OS bez pamięci rozmowy poprawnie rozpoznał rolę Project Reconstructora, jego wersję i sposób użycia.
+
 ### VALIDATED RESULT
 
 Brak długoterminowej walidacji. Nie potwierdzono jeszcze stabilności na większej liczbie niezależnych projektów ani zgodności wyników między różnymi modelami.
@@ -54,11 +60,12 @@ Brak długoterminowej walidacji. Nie potwierdzono jeszcze stabilności na więks
 ## Najnowsze decyzje
 
 - Obecny prompt zostaje zamrożony jako wersja `v1.0`.
-- Dalsze zmiany wynikają wyłącznie z konkretnych, najlepiej powtarzalnych błędów.
-- Repozytorium pozostaje prywatne.
-- Pełne prywatne materiały źródłowe nie są przechowywane w testach.
+- Dalsze zmiany promptu wynikają wyłącznie z konkretnych, najlepiej powtarzalnych błędów.
+- Widoczność repozytorium nie jest częścią kanonicznego stanu projektu.
+- Pełne prywatne materiały źródłowe nie są przechowywane w testach niezależnie od widoczności repo.
 - Creative OS przechowuje wyłącznie stan wysokiego poziomu; szczegółowy stan tego narzędzia należy do tego repozytorium.
-- Nie rozwijamy teraz automatyzacji ani dodatkowej architektury.
+- Deterministyczny walidator repo jest dozwoloną kontrolą spójności i nie zmienia zamrożonego promptu.
+- Automatyczny runner modeli, scoring jakości i dodatkowa orkiestracja pozostają poza bieżącym zakresem.
 
 ## Znane ograniczenia
 
@@ -66,7 +73,8 @@ Brak długoterminowej walidacji. Nie potwierdzono jeszcze stabilności na więks
 - Sprzeczne jawne decyzje o podobnym pierwszeństwie wymagają rozstrzygnięcia użytkownika.
 - AI może nadal formułować pojedyncze zdania zbyt mocno; przed zapisem do repo wymagany jest przegląd.
 - Limit `LITE` może zostać przekroczony o minimalny draft źródła prawdy.
-- Brak automatycznego test runnera.
+- Walidator deterministyczny nie ocenia semantycznej jakości odpowiedzi AI.
+- Brak automatycznego runnera modeli.
 
 ## Bieżąca faza
 

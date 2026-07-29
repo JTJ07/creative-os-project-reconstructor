@@ -13,7 +13,8 @@ Walidator jest deterministyczny. Sprawdza:
 - obecność wymaganych sekcji i reguł w `PROMPT_STARTOWY.md`;
 - kompletność pięciu scenariuszy regresji;
 - zachowanie reguły zamrożenia v1.0;
-- rozdzielenie parkingu automatycznego runnera modeli od bieżącej kontroli repo.
+- rozdzielenie parkingu automatycznego runnera modeli od bieżącej kontroli repo;
+- obecność lekkiego filtra PR wymagającego konkretnej porażki, dowodu zaliczenia i testu regresji przy zmianie promptu.
 
 ## Granica
 
@@ -23,7 +24,8 @@ Ten walidator:
 - nie ocenia semantycznej jakości odpowiedzi modelu;
 - nie zmienia PROMPT_STARTOWY.md — kanoniczny plik pozostaje zamrożony;
 - nie zastępuje rzeczywistych testów rekonstrukcji;
-- nie aktywuje pomysłów z `IDEA_ARCHIVE.md`.
+- nie aktywuje pomysłów z `IDEA_ARCHIVE.md`;
+- nie wymaga przypadku regresyjnego dla zwykłej zmiany technicznej, która nie zmienia promptu.
 
 GitHub Actions uruchamia kontrolę przy pull requestach i zmianach na `main`.
 

@@ -24,6 +24,7 @@ REQUIRED_FILES = [
     "IDEA_ARCHIVE.md",
     "tests/README.md",
     "VALIDATION.md",
+    ".github/pull_request_template.md",
 ] + TEST_FILES
 
 
@@ -132,11 +133,30 @@ def check_validation_boundary() -> None:
         "nie uruchamia modeli AI",
         "nie zmienia PROMPT_STARTOWY.md",
         "GitHub Actions",
+        "lekkiego filtra PR",
+        "zwykłej zmiany technicznej",
     ]
     for marker in required:
         if marker not in validation:
             fail(f"VALIDATION.md nie zawiera granicy: {marker}")
     print("[PASS] walidator jest oddzielony od runnera modeli i promptu")
+
+
+def check_pull_request_filter() -> None:
+    template = read_text(".github/pull_request_template.md")
+    required = [
+        "Konkretna porażka lub regresja",
+        "Dlaczego obecny mechanizm nie wystarcza",
+        "Obserwowalny dowód zaliczenia",
+        "Test regresji",
+        "Dodany koszt utrzymania",
+        "Poza zakresem",
+        "BRAK ZMIANY PROMPTU",
+    ]
+    for marker in required:
+        if marker not in template:
+            fail(f"szablon PR nie zawiera filtra: {marker}")
+    print("[PASS] filtr PR wymaga dowodu przy zmianie promptu bez narzutu dla poprawek technicznych")
 
 
 def main() -> None:
@@ -146,6 +166,7 @@ def main() -> None:
     check_regression_tests()
     check_evolution_and_parking()
     check_validation_boundary()
+    check_pull_request_filter()
     print("[PASS] Project Reconstructor v1.0 jest spójny na poziomie repozytorium")
 
 

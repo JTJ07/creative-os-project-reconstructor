@@ -21,7 +21,7 @@ Ten walidator:
 
 - nie uruchamia modeli AI;
 - nie ocenia semantycznej jakości odpowiedzi modelu;
-- nie zmienia `PROMPT_STARTOWY.md`;
+- nie zmienia PROMPT_STARTOWY.md — kanoniczny plik pozostaje zamrożony;
 - nie zastępuje rzeczywistych testów rekonstrukcji;
 - nie aktywuje pomysłów z `IDEA_ARCHIVE.md`.
 

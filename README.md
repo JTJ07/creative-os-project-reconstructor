@@ -42,6 +42,16 @@ Domyślnym trybem jest `LITE / READ_ONLY`.
 - `EVOLUTION_LOG.md` — problemy, opór, poprawki i wyniki testów.
 - `IDEA_ARCHIVE.md` — wartościowe pomysły odłożone bez aktywacji.
 - `tests/` — zanonimizowane scenariusze regresji i kryteria zaliczenia.
+- `VALIDATION.md` — zakres deterministycznej kontroli repozytorium.
+- `scripts/verify_reconstructor.py` — walidator uruchamiany lokalnie i przez CI.
+
+## Walidacja
+
+```bash
+python scripts/verify_reconstructor.py
+```
+
+Walidator sprawdza strukturę i niezmienniki wersji v1.0. Nie uruchamia modeli AI i nie zastępuje rzeczywistych testów rekonstrukcji.
 
 ## Reguła rozwoju
 
@@ -49,6 +59,6 @@ Domyślnym trybem jest `LITE / READ_ONLY`.
 
 Zmiana promptu wymaga konkretnego błędu, dowodu z testu i sprawdzenia, czy poprawka nie psuje wcześniejszych zachowań.
 
-## Prywatność
+## Ochrona danych
 
-Repozytorium jest prywatne. Mimo to nie należy zapisywać tu pełnych prywatnych rozmów, danych osobowych ani poufnych materiałów projektów. Testy przechowują wyłącznie zanonimizowany opis przypadku i oczekiwane zachowanie.
+Niezależnie od ustawionej widoczności repozytorium nie należy zapisywać tu pełnych prywatnych rozmów, danych osobowych ani poufnych materiałów projektów. Testy przechowują wyłącznie zanonimizowany opis przypadku i oczekiwane zachowanie.

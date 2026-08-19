@@ -24,6 +24,8 @@ Prompt:
 - przygotowuje kompletny minimalny draft `PROJECT_STATE.md`, zanim poprosi o jego zatwierdzenie;
 - blokuje zapis do repo bez jawnej zgody użytkownika.
 
+Deterministyczny validator repo ma dodatkowo zintegrowane bounded P0 hardening: wymagane pliki muszą pozostać zwykłymi, pojedynczo dowiązanymi plikami wewnątrz repository root; symlink/outside-root oraz hardlink paths są odrzucane fail-closed. To jest maintenance walidatora, nie zmiana promptu v1.0 ani nowa capability rekonstrukcyjna.
+
 ## Status dowodu
 
 ### EXISTING ARTIFACT
@@ -40,6 +42,7 @@ Prompt:
 
 - Prompt może zostać wklejony do nowej rozmowy wraz z materiałami projektu i prowadzi analizę według stałego formatu A–I.
 - Deterministyczny walidator może sprawdzić obecność plików, wersję, strukturę promptu, parking i kryteria regresji bez uruchamiania modelu AI.
+- Walidator odrzuca wymagane pliki będące symlinkami, pliki rozwiązujące się poza repository root oraz pliki z wieloma hardlinkami.
 
 ### OBSERVED WORKING RESULT
 
@@ -68,6 +71,21 @@ Wynik:
 
 Evidence: `evidence/REAL_VALUE_RUN_001_SCRIPTOPS_2026-08-19.md`.
 
+### P0 VALIDATOR ROOT-CONTAINMENT HARDENING — INTEGRATED
+
+Po Run 001 fresh security review ujawnił, że wymagany plik mógł być symlinkiem prowadzącym poza repository root. Minimalny hardening został Human-accepted i osobno Human-authorized do merge przez PR #6.
+
+```text
+PR #6
+accepted head: 37f64a7a7b0071a4d96805132605a7f3437946ea
+merge checkpoint: e6d39e56409e165034d0441e162548ede7c3beb3
+result: MERGED / VERIFIED
+prompt change: NO
+new reconstruction capability: NO
+```
+
+Zintegrowany validator wymaga teraz bezpiecznego regular file containment i blokuje symlink/outside-root oraz hardlink abuse. Historyczny Run 001 pozostaje observed evidence; P0 maintenance nie zmienia jego wyniku ani nie promuje go do długoterminowej walidacji.
+
 ### VALIDATED RESULT
 
 Brak długoterminowej walidacji. Jeden real-value run zwiększa observed evidence, ale nie potwierdza jeszcze stabilności na większej liczbie niezależnych projektów ani zgodności wyników między różnymi modelami.
@@ -80,6 +98,7 @@ Brak długoterminowej walidacji. Jeden real-value run zwiększa observed evidenc
 - Pełne prywatne materiały źródłowe nie są przechowywane w testach niezależnie od widoczności repo.
 - Creative OS przechowuje wyłącznie stan wysokiego poziomu; szczegółowy stan tego narzędzia należy do tego repozytorium.
 - Deterministyczny walidator repo jest dozwoloną kontrolą spójności i nie zmienia zamrożonego promptu.
+- Root-containment/hardlink hardening walidatora jest zintegrowanym bounded maintenance i nie stanowi triggera zmiany promptu.
 - Automatyczny runner modeli, scoring jakości i dodatkowa orkiestracja pozostają poza bieżącym zakresem.
 
 ## Znane ograniczenia
@@ -96,11 +115,11 @@ Brak długoterminowej walidacji. Jeden real-value run zwiększa observed evidenc
 
 Stabilizacja przez rzeczywiste użycie bez rozbudowy promptu.
 
-Pierwszy real-value run został wykonany. Nie znaleziono powodu do zmiany promptu; znaleziono realny drift w stanie targetu, który prompt poprawnie sklasyfikował.
+Pierwszy real-value run został wykonany. Nie znaleziono powodu do zmiany promptu; znaleziono realny drift w stanie targetu, który prompt poprawnie sklasyfikował. Późniejszy validator root-containment P0 został zamknięty i zintegrowany bez zmiany promptu.
 
 ## Jeden następny krok
 
-Nie zmieniać promptu. Zachować wynik Run 001 jako observed evidence i wrócić do Reconstructora dopiero przy kolejnym rzeczywistym projekcie albo przy konkretnej porażce semantycznej. Globalny ekosystem może przejść do kolejnego materially-different workload po naprawie state drift ujawnionego przez Run 001.
+Nie zmieniać promptu. Zachować Run 001 oraz P0 hardening jako odrębne observed/integrated evidence i wrócić do Reconstructora dopiero przy kolejnym rzeczywistym projekcie albo przy konkretnej porażce semantycznej. Nie tworzyć osobnego workloadu wyłącznie po to, by zwiększać licznik testów.
 
 ## Warunek zmiany promptu
 

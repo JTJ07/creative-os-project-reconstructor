@@ -53,9 +53,24 @@ Prompt poprawnie przeanalizował różne klasy projektów, między innymi:
 
 Niezależny cold start Creative OS bez pamięci rozmowy poprawnie rozpoznał rolę Project Reconstructora, jego wersję i sposób użycia.
 
+### REAL-VALUE RUN 001 — ScriptOps
+
+2026-08-19 wykonano `LITE / READ_ONLY` na rzeczywistym projekcie `JTJ07/scriptops@daa6e5dc210e09171a530eeffe5601e0e74ae041` z cross-checkiem aktualnego COS i zaakceptowanej historii Saddle.
+
+Wynik:
+
+- Reconstructor poprawnie zachował lokalne `PROJECT_STATE.md` jako semantic owner szczegółowego stanu ScriptOps;
+- odróżnił `PHASE 6 CONTROLLED WORKFLOW MECHANISM PASS` od maturity/production claim;
+- wykrył trzy realne current-state contradictions: stale ScriptOps state owner, stale ScriptOps handoff i stale pochodny pointer/handoff w COS;
+- wskazał state reconciliation jako pierwszy brakujący warunek zamiast nowej implementacji;
+- nie utworzył hidden functional PASS, nie aktywował projektu i nie zaproponował nowej capability;
+- nie ujawnił błędu wymagającego zmiany zamrożonego promptu v1.0.
+
+Evidence: `evidence/REAL_VALUE_RUN_001_SCRIPTOPS_2026-08-19.md`.
+
 ### VALIDATED RESULT
 
-Brak długoterminowej walidacji. Nie potwierdzono jeszcze stabilności na większej liczbie niezależnych projektów ani zgodności wyników między różnymi modelami.
+Brak długoterminowej walidacji. Jeden real-value run zwiększa observed evidence, ale nie potwierdza jeszcze stabilności na większej liczbie niezależnych projektów ani zgodności wyników między różnymi modelami.
 
 ## Najnowsze decyzje
 
@@ -75,14 +90,17 @@ Brak długoterminowej walidacji. Nie potwierdzono jeszcze stabilności na więks
 - Limit `LITE` może zostać przekroczony o minimalny draft źródła prawdy.
 - Walidator deterministyczny nie ocenia semantycznej jakości odpowiedzi AI.
 - Brak automatycznego runnera modeli.
+- Jeden real-value run nie jest jeszcze długoterminową walidacją.
 
 ## Bieżąca faza
 
 Stabilizacja przez rzeczywiste użycie bez rozbudowy promptu.
 
+Pierwszy real-value run został wykonany. Nie znaleziono powodu do zmiany promptu; znaleziono realny drift w stanie targetu, który prompt poprawnie sklasyfikował.
+
 ## Jeden następny krok
 
-Użyć wersji `v1.0` na kolejnych rzeczywistych projektach i zapisywać wyłącznie konkretne porażki wraz z przypadkiem regresyjnym.
+Nie zmieniać promptu. Zachować wynik Run 001 jako observed evidence i wrócić do Reconstructora dopiero przy kolejnym rzeczywistym projekcie albo przy konkretnej porażce semantycznej. Globalny ekosystem może przejść do kolejnego materially-different workload po naprawie state drift ujawnionego przez Run 001.
 
 ## Warunek zmiany promptu
 

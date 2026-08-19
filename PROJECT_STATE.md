@@ -61,7 +61,7 @@ Wynik:
 
 - Reconstructor poprawnie zachował lokalne `PROJECT_STATE.md` jako semantic owner szczegółowego stanu ScriptOps;
 - odróżnił `PHASE 6 CONTROLLED WORKFLOW MECHANISM PASS` od maturity/production claim;
-- wykrył trzy realne current-state contradictions: stale ScriptOps state owner, stale ScriptOps handoff i stale pochodny pointer/handoff w COS;
+- wykrył cztery realne current-state contradictions: stale ScriptOps state owner, stale ScriptOps handoff, stale cold-start routing w ScriptOps README oraz stale pochodny pointer/handoff w COS;
 - wskazał state reconciliation jako pierwszy brakujący warunek zamiast nowej implementacji;
 - nie utworzył hidden functional PASS, nie aktywował projektu i nie zaproponował nowej capability;
 - nie ujawnił błędu wymagającego zmiany zamrożonego promptu v1.0.

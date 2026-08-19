@@ -81,7 +81,19 @@ Those statements describe the pre-merge Phase-6 checkpoint and should now be his
 
 Semantic status: `CONTRADICTION`.
 
-### RV-001-D3 — COS cross-project copy preserves the same stale ScriptOps/Saddle state
+### RV-001-D3 — ScriptOps README still routes a cold start to the already-closed Saddle gate
+
+`ScriptOps/README.md` correctly reports `PHASE 6 CONTROLLED WORKFLOW MECHANISM PASS / NO MATURITY CLAIM`, but its final current-state section still says:
+
+- after merge Phase 6 the result returns to Saddle;
+- the next missing evidence is the live AI-worker benchmark/effect path;
+- `FUNCTIONAL_SADDLE_ACCEPTED: NOT YET`.
+
+Because PR #7 is already merged and Saddle functional acceptance is later accepted history, the README can send a fresh session toward already-completed work even though the local mechanism claim itself is correct.
+
+Semantic status: `CONTRADICTION`.
+
+### RV-001-D4 — COS cross-project copy preserves the same stale ScriptOps/Saddle state
 
 Current `COS/CREATIVE_OS.md` still presents ScriptOps as `SADDLE LIVE MODEL EVIDENCE NEXT` and says its missing evidence includes `FUNCTIONAL_SADDLE_ACCEPTED`.
 
@@ -93,7 +105,7 @@ Semantic status: `CONTRADICTION`.
 
 ## E. GDZIE ZATRZYMAŁA SIĘ PRACA
 
-The actual ScriptOps Phase-6 mechanism proof is complete and merged. The apparent blocker in local state is historical.
+The actual ScriptOps Phase-6 mechanism proof is complete and merged. The apparent blocker in current startup/state documents is historical.
 
 The project is therefore not blocked on PR #7 or Saddle functional acceptance. Its accurate next project-local workload cannot be selected safely until the current-state documents stop presenting already-completed work as open.
 
@@ -105,13 +117,14 @@ Required factual reconciliation:
 
 1. ScriptOps `PROJECT_STATE.md` — preserve Phase-6 proof, remove historical Saddle/PR-#7 blockers from current status.
 2. ScriptOps `HANDOFF.md` — replace the pre-merge handoff with current local truth.
-3. COS high-level ScriptOps pointer/global handoff — reflect current local owner state and already-closed COS/Saddle checkpoints without taking local semantic ownership.
+3. ScriptOps `README.md` — stop routing cold start to the already-closed Saddle acceptance gate while preserving `NO MATURITY CLAIM`.
+4. COS high-level ScriptOps pointer/global handoff — reflect current local owner state and already-closed COS/Saddle checkpoints without taking local semantic ownership.
 
 No new capability, rewrite, model runner, UI, graph, autonomous approval or architecture is required.
 
 ## G. JEDEN NAJLEPSZY NASTĘPNY KROK
 
-**Reconcile ScriptOps current-state owner and handoff from existing accepted repository evidence, then reconcile the derived COS pointer.**
+**Reconcile ScriptOps current-state owner/startup/handoff from existing accepted repository evidence, then reconcile the derived COS pointer.**
 
 Only after that factual state correction should the materially different ScriptOps workload be selected/executed.
 
@@ -131,7 +144,7 @@ No new `PROJECT_STATE.md` is needed because ScriptOps already has one. The corre
 
 ```text
 REAL_VALUE_OBSERVED: YES
-TARGET_CURRENT_STATE_CONTRADICTIONS_FOUND: 3
+TARGET_CURRENT_STATE_CONTRADICTIONS_FOUND: 4
 HIDDEN_FUNCTIONAL_PASS_INFERRED: 0
 PROMPT_FALSE_SUCCESS: 0 observed in this run
 PROMPT_CHANGE_TRIGGERED: NO

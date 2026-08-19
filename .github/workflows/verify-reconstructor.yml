@@ -22,3 +22,6 @@ jobs:
 
       - name: Verify repository contract
         run: python scripts/verify_reconstructor.py
+
+      - name: Run validator security regression
+        run: python -m unittest discover -s tests -p 'test_*.py' -v

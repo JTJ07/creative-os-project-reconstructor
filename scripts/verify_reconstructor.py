@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import sys
+import stat
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -33,16 +34,35 @@ def fail(message: str) -> None:
     raise SystemExit(1)
 
 
+def regular_repository_file(relative_path: str) -> Path:
+    candidate = ROOT / relative_path
+    if candidate.is_symlink():
+        fail(f"{relative_path} nie może być dowiązaniem symbolicznym")
+    try:
+        resolved = candidate.resolve(strict=True)
+        resolved.relative_to(ROOT.resolve(strict=True))
+        metadata = resolved.stat()
+    except (OSError, ValueError) as exc:
+        fail(f"{relative_path} nie jest bezpiecznym plikiem repozytorium: {exc}")
+    if not stat.S_ISREG(metadata.st_mode) or metadata.st_nlink != 1:
+        fail(f"{relative_path} musi być zwykłym, pojedynczo dowiązanym plikiem")
+    return resolved
+
+
 def read_text(relative_path: str) -> str:
     try:
-        return (ROOT / relative_path).read_text(encoding="utf-8")
+        return regular_repository_file(relative_path).read_text(encoding="utf-8")
     except UnicodeDecodeError as exc:
         fail(f"{relative_path} nie jest poprawnym UTF-8: {exc}")
     raise AssertionError("unreachable")
 
 
 def check_required_files() -> None:
-    missing = [path for path in REQUIRED_FILES if not (ROOT / path).is_file()]
+    missing = [
+        path
+        for path in REQUIRED_FILES
+        if not (ROOT / path).exists() or (ROOT / path).is_symlink()
+    ]
     if missing:
         fail("brak wymaganych plików: " + ", ".join(missing))
     print(f"[PASS] wymagane pliki: {len(REQUIRED_FILES)}")

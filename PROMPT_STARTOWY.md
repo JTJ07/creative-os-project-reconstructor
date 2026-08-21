@@ -2,7 +2,7 @@
 
 Pracujemy zgodnie z Creative OS zapisanym w repozytorium:
 
-https://github.com/litrgratis-pixel/COS
+https://github.com/JTJ07/COS
 
 Najpierw przeczytaj:
 

@@ -28,6 +28,9 @@ REQUIRED_FILES = [
     ".github/pull_request_template.md",
 ] + TEST_FILES
 
+CANONICAL_COS_LOCATOR = "https://github.com/JTJ07/COS"
+HISTORICAL_COS_LOCATOR = "https://github.com/litrgratis-pixel/COS"
+
 
 def fail(message: str) -> None:
     print(f"[FAIL] {message}", file=sys.stderr)
@@ -105,9 +108,14 @@ def check_prompt_contract() -> None:
         if marker not in prompt:
             fail(f"PROMPT_STARTOWY.md nie zawiera wymaganej reguły: {marker}")
 
+    if CANONICAL_COS_LOCATOR not in prompt:
+        fail(f"PROMPT_STARTOWY.md nie wskazuje current canonical COS locator: {CANONICAL_COS_LOCATOR}")
+    if HISTORICAL_COS_LOCATOR in prompt:
+        fail(f"PROMPT_STARTOWY.md nadal używa historycznego COS locatora: {HISTORICAL_COS_LOCATOR}")
+
     if len(prompt.splitlines()) < 350:
         fail("PROMPT_STARTOWY.md jest podejrzanie skrócony")
-    print("[PASS] kontrakt promptu v1.0 jest kompletny")
+    print("[PASS] kontrakt promptu v1.0 jest kompletny i wskazuje current canonical COS locator")
 
 
 def check_regression_tests() -> None:
